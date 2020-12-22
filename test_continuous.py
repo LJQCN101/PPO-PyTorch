@@ -1,4 +1,6 @@
 import gym
+import gym_jsbsim
+import jsbsim
 from PPO_continuous import PPO, Memory
 from PIL import Image
 import torch
@@ -7,7 +9,7 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 def test():
     ############## Hyperparameters ##############
-    env_name = "BipedalWalker-v2"
+    env_name = "JSBSim-HeadingControlTask-Cessna172P-Shaping.EXTRA-NoFG-v0"
     env = gym.make(env_name)
     state_dim = env.observation_space.shape[0]
     action_dim = env.action_space.shape[0]

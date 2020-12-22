@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 from torch.distributions import MultivariateNormal
 import gym
+import gym_jsbsim
+import jsbsim
 import numpy as np
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -137,7 +139,7 @@ class PPO:
         
 def main():
     ############## Hyperparameters ##############
-    env_name = "BipedalWalker-v2"
+    env_name = "JSBSim-HeadingControlTask-Cessna172P-Shaping.EXTRA-NoFG-v0"
     render = False
     solved_reward = 300         # stop training if avg_reward > solved_reward
     log_interval = 20           # print avg reward in the interval
@@ -184,7 +186,7 @@ def main():
             # Running policy_old:
             action = ppo.select_action(state, memory)
             state, reward, done, _ = env.step(action)
-            
+            #env.render(mode='human')
             # Saving reward and is_terminals:
             memory.rewards.append(reward)
             memory.is_terminals.append(done)
